@@ -32,16 +32,19 @@ export default class App extends Component {
               <Typography variant='h6'>Buscar</Typography>
             </Toolbar>
           </AppBar>
-          <div className='fullPage'>
-            <div className='showGrid'>
-            {
-              pokemons ? pokemons.map((pokemon)=>{
-                return (
-                  <Pokecard url={pokemon.url}/>
-                )
-                }) : <Typography variant='h1'>Loading</Typography>
-            }
-            </div>
+          <div>
+            <Container maxWidth='sm'>
+              <Typography variant='h2'>Pokedex</Typography>
+              <Grid container spacing={4}>
+                {
+                  pokemons ? pokemons.map((pokemon)=>{
+                    return (
+                        <Pokecard url={pokemon.url}/>
+                    )
+                    }) : <Typography variant='h1'>Loading</Typography>
+                }
+              </Grid>
+            </Container>
           </div>
       </>
     )
