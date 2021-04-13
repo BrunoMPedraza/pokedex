@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import {fetchPokemons} from './components/fetchPokemons';
+import Pokecard from './components/Pokecard'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor(props){
+    super(props)
+
+    this.state ={
+      pokemons:''
+    }
+  }
+
+  componentDidMount() {
+      fetchPokemons("https://pokeapi.co/api/v2/pokemon?limit=500").then((pokemons)=>{
+        this.setState({
+        pokemons:pokemons.results,
+      })
+    })
+  };
+
+  render() {
+    const {pokemons} = this.state;
+    return (
+      <div className='fullPage'>
+        <div className='showGrid'>
+        {
+          pokemons ? pokemons.map((pokemon)=>{
+            return (
+              <Pokecard url={pokemon.url}/>
+            )
+            }) : <div class='loader'>Loading</div>
+        }
+        </div>
+      </div>
+    )
+  }
 }
-
-export default App;
