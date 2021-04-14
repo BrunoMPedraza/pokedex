@@ -1,17 +1,18 @@
 import React from 'react'
 import {fetchPokemons} from './fetchPokemons';
-import SecondFetch from './SecondFetch';
+import Pokecard from './Pokecard';
 const {useState,useEffect} = React;
 
 const Searchbar = () => {
-    const [pokemons,setPokemons] = useState([]);
-
+    const [pokemons,setPokemons] = useState();
+    const [loading,setLoading] = useState(false);
     const pokeFetch = async() =>{
-        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=500');
+        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=1000');
         const promise = data.results.map(async (p)=>{
             return await fetchPokemons(p.url)
         })
         const results = await Promise.all(promise);
+        setLoading(true);
         setPokemons(results);
     }
 
@@ -20,22 +21,21 @@ const Searchbar = () => {
     },[])
 
     return (
-        <div className='fullPage'>
-        <div className='showGrid'>
+    <>
         {
-            (!pokemons) ? (<div>noay</div>)
-
-            : (<div>
+            (!pokemons) ? (<img className='loader 'src='https://i.imgur.com/Zan8Ltj.gif' alt='loading'/>)
+            : 
+            (<div className='showGrid'>
                 {pokemons.map((pokemon,idx)=>{
-                return <SecondFetch pokemons={pokemon}/>;
+                return (
+                    <div>
+                        <Pokecard pokemons={pokemon} key={idx}/>
+                    </div>);
                 })}
-                </div>)
+            </div>)
         }
-       {/* { pokemons ? { return(<Pokecard pokemons={pokemons}/>)}
-         : return(<div></div>)
-        } */}
-        </div>
-        </div>
+    </>
+
     )
 }
 

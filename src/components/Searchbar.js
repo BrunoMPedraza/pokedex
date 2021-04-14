@@ -1,6 +1,5 @@
 import React from 'react'
 import {fetchPokemons} from './fetchPokemons';
-import Pokecard from './SecondFetch';
 const {useState} = React;
 
 const Searchbar = () => {
@@ -16,17 +15,19 @@ const Searchbar = () => {
         setPokemon(data);
     }
     return (
-        <div>
-            <input 
-            type='text' 
-            placeholder='Buscar'
-            onChange={onChange}>
-            </input>
-            <p>{search}</p>
-            <button onClick={onClick}>Buscar</button>
-            <div>
-            {pokemon && 
-            <p>{pokemon.name}</p>}
+        <div className='navBar'>
+            <div className='searchBar'>
+                <input 
+                type='text' 
+                placeholder="Pokemon's name"
+                onChange={onChange}>
+                </input>
+                <p>{search}</p>
+                <button onClick={onClick}>Buscar</button>
+                <div className='searchResult'>
+                    {pokemon && 
+                    <p>{pokemon.name}</p>}
+                </div>
             </div>
         </div>
     )
