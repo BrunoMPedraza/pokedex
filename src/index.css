@@ -35,13 +35,17 @@ body {
   padding:200px;
   align-items:center;
   content:center;
-  overflow-y:scroll;
   position:relative;
   display:grid;
   grid-template-columns: repeat(4,1fr);
   grid-template-rows: auto;
   gap:20px;
   padding:20px;
+}
+
+.imgWrapper{
+  border:1px solid black;
+  height:20%;
 }
 
 .pokeCard{
@@ -93,3 +97,93 @@ body {
   background-color:#89f1ff;
   text-align:center;
 }
+
+/*                MODAL                     */
+.background{
+  left:0px;
+  top:0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper{
+  width: 80%;
+  height: 70%;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows:1fr 5fr;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+@media (max-width: 450px){
+    .wrapper{
+      height:30%;
+      width:90%;
+    }
+
+    .profile{
+      margin:0;
+    }
+
+    
+  .profilePic{
+    margin:15%;
+    height:50% !important;
+  }
+    
+}
+
+.title{
+  grid-column: 2;
+  grid-row:1;
+  font-size:2rem;
+  font-weight: bold;
+}
+
+.title span{
+  color:gray;
+  font-size:1rem;
+}
+
+.content{
+  grid-column:2;
+  grid-row:2;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows:1fr 1fr 1fr 1fr;
+  padding:3%;
+}
+
+.content span{
+  font-weight:bold;
+}
+
+.profile{
+  margin:10px;
+  grid-column: 1;
+  grid-row:2;
+}
+
+.profilePic{
+  margin:15%;
+  width:85%;
+  height:85%;
+}
+
+.rotate{
+  left:0px;
+  position:absolute;
+  top:50px;
+  height:10%;
+}
+/* =================================================================*/

@@ -19,28 +19,43 @@ const Id = styled.div`
 
 
 const Pokecard = (props) => {
-    const {name,id,sprites} = props.pokemons;
-    const {front_default} = sprites;
+    const {name,id,sprites,height,weight,abilities} = props.pokemons;
+    const {ability} = abilities;
+    const {front_default,versions} = sprites;
+    const {"generation-v":generationv} = versions;
+    const {"black-white":black} = generationv;
+    const {animated} = black
+    const capitalizedName= (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
     const [showModal, setShowModal] = useState(false);
+
     const openModal = () => {
         setShowModal(prev => !prev)
-        console.log(name)
     }
     
     return (
         <div className='pokeCard' key={name} onClick={openModal}>
             <div className='image'>
-                <img src={front_default} alt={name + "'s front"}></img>
+                <img src={black.front_default} alt={name + "'s front"}></img>
             </div>
             <Name>
-                {name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1)}
+                {capitalizedName}
             </Name>
             <Id>
                 #{id}
             </Id>
-            <Modal 
-            showModal={showModal} 
-            setShowModal={setShowModal}/>
+            <div className='modal'>
+                <Modal 
+                showModal={showModal} 
+                setShowModal={setShowModal}
+                name={capitalizedName}
+                id={id}
+                front={animated.front_default}
+                back={animated.back_default}
+                height={height}
+                weight={weight}
+                abilities={abilities}
+                />
+            </div>
         </div>
     )
 }
