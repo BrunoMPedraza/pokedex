@@ -1,47 +1,30 @@
-import React, { Component } from 'react'
-import { fetchPokemons } from './fetchPokemons'
+import React from 'react';
 
-export default class Pokecard extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            name:'',
-            img:'',
-            id:'',
-            loading:true,
-        }
+
+
+
+const Pokecard = (props) => {
+    const {name,id,sprites} = props.pokemons;
+    const {"generation-v":generationv} = sprites.versions;
+    const {"black-white":black} = generationv;
+    
+    const capitalizedName= (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
+    const formattedId = ('000'+id).slice(-3);
+    const communicateModal = () =>{
+        props.openModal(props.arrayIndex);
     }
 
-    componentDidMount(){
-        const {url} = this.props
-        fetchPokemons(url).then((pokemons)=>{
-            this.setState({
-                name:pokemons.name,
-                img:pokemons.sprites.front_default,
-                id:pokemons.id,
-                loading:false,
-            })
-        }
-        
-        )
-    }
-
-    render() {
-        const {name,id,img,loading} = this.state;
-
-        return (
-            <div className='pokeStructure'>
-            {loading ? <p>¿Quién es este pokemon?</p> : 
-                (
-                <>
-                <img src={img} alt={`${name}'s front`}/>
-                <div className='title'>{name.charAt(0).toUpperCase() + name.slice(1)}</div>
-                <div className='id'>#{id}</div>
-                </>
-                )
-            }
+    return (
+        <div className='pokeCard' key={name} onClick={communicateModal}>
+            <div className='image'>
+                <img src={black.front_default} alt={name + "'s front"}></img>
             </div>
-       
-        )
-    }
+            <div className='pokeName'>
+                {capitalizedName}
+            </div>
+            <div className='id'>#{formattedId}</div>
+        </div>
+    )
 }
+
+export default Pokecard
