@@ -1,22 +1,33 @@
 import React from 'react'
 import {fetchPokemons} from './fetchPokemons';
 import Pokecard from './Pokecard';
+import Modal from './Modal';
 const {useState,useEffect} = React;
 
 const Searchbar = () => {
     const [pokemons,setPokemons] = useState();
     const [loading,setLoading] = useState(false);
+    const [showModal,setShowModal] = useState(false);
+    const [pickedPokemon,setPickedPokemon] = useState();
     const pokeFetch = async() =>{
-        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=649');
+        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=10');
         const promise = data.results.map(async (p)=>{
             return await fetchPokemons(p.url)
         })
         const results = await Promise.all(promise);
-        setLoading(true);
         setPokemons(results);
+        setLoading(true);
+ 
+    }
+
+    const openModal = (e) => {
+        setShowModal(true);
+        console.log(pokemons[e]);
+        setPickedPokemon(e);
     }
 
     useEffect(()=>{
+
         pokeFetch();
     },[])
 
@@ -29,9 +40,23 @@ const Searchbar = () => {
                 {pokemons.map((pokemon,idx)=>{
                 return (
                     <div>
-                        <Pokecard pokemons={pokemon} key={idx}/>
+                        <Pokecard 
+                        pokemons={pokemon} 
+                        key={idx}
+                        arrayIndex={idx}
+                        openModal={openModal}
+                        /> 
+
+                        
                     </div>);
                 })}
+                {(pokemons[pickedPokemon]) ? <div className='modal'>
+                        <Modal 
+                            showModal={showModal} 
+                            setShowModal={setShowModal}
+                            pokemon={pokemons[pickedPokemon]}
+                         />
+                </div> : null}
             </div>)
         }
     </>

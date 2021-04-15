@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState} from 'react';
 
-const Modal = ({showModal,setShowModal,name,front,back,id,height,weight,abilities,type1,type2}) => {
+const Modal = ({showModal,setShowModal,pokemon}) => {
   
   const [turned,setTurned] = useState(true);
   const turnPokemon = (e) => {
@@ -9,6 +9,13 @@ const Modal = ({showModal,setShowModal,name,front,back,id,height,weight,abilitie
       console.log(type1.type.name)
   }
 
+  const {name,id,sprites,height,weight,abilities,types} = pokemon;
+  const {"generation-v":generationv} = sprites.versions;
+  const {"black-white":black} = generationv;
+  const {animated} = black
+  const {"0":type1,"1":type2} = types;
+  const capitalizedName= (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
+  const formattedId = ('000'+id).slice(-3);
   const meters= ((height/39.37)*4).toFixed(2); //please dont ask why *4, i just tested until it came to the real google height
 
  
@@ -38,7 +45,7 @@ const Modal = ({showModal,setShowModal,name,front,back,id,height,weight,abilitie
             </div>
           </div>
           <div className='profile'>
-            <img className='profilePic' src={turned ? front : back} alt={name+"'s front"} />
+            <img className='profilePic' src={turned ? animated.front_default : animated.back_default} alt={name+"'s front"} />
             <img className='rotate' src={'https://cdn.iconscout.com/icon/premium/png-512-thumb/rotate-video-674526.png'} onClick={turnPokemon} alt='Click to turn the pokemon around'></img>
           </div>
         </div>
