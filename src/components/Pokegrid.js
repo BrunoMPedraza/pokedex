@@ -35,6 +35,7 @@ const Pokegrid = () => {
 
 
     useEffect(()=>{
+        console.log('Website made by Bruno Martín Pedraza :)')
         pokeFetch();
     },[])
 
@@ -52,18 +53,16 @@ const Pokegrid = () => {
                 <div className='showGrid'>
                     {pokemons.map((pokemon,idx)=>{
                     
-                    return (                           
-                        <div>
-                            <Pokecard 
+                    return (                       
+                        <Pokecard 
                             pokemons={pokemon} 
                             key={idx}
                             arrayIndex={idx}
                             openModal={openModal}
-                            /> 
-                        </div>)
-                        ;
+                        />);
                     })}
-                    {(pokemons[pickedPokemon]) ? <div className='modal'>
+                    {(pokemons[pickedPokemon]) ? 
+                    <div className='modal' key='modalKey'>
                             <Modal 
                                 showModal={showModal} 
                                 setShowModal={setShowModal}

@@ -16,7 +16,9 @@ const Modal = ({showModal,setShowModal,pokemon,left,right,turnModal}) => {
   const capitalizedName = (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
   const formattedId = ('000'+id).slice(-3);
   const meters = ((height/39.37)*4).toFixed(2); //please dont ask why *4, i just tested until it came to the real google height
-
+  const style1 = type1 ? type1.type.name : 'none';
+  const style2 = type2 ? type2.type.name : 'none'; //sorry, i know this is terrible but i want to turn this work in time
+  
   
 
   return (
@@ -41,14 +43,15 @@ const Modal = ({showModal,setShowModal,pokemon,left,right,turnModal}) => {
               <div className='weight'><b>Weight:</b> {weight/10}kg </div>
             <div className='abilities'>
               <p>Abilities</p>
-              <div className='slot1'>{(abilities[0]) ? (abilities[0].ability.name) : (<></>)}</div>
+              {/* this is bad */}
+              <div className='slot1'>{(abilities[0]) ? (abilities[0].ability.name) : (<></>)}</div> 
               <div className='slot2'>{(abilities[1]) ? (abilities[1].ability.name) : (<></>)}</div>
               <div className='slot3'>{(abilities[2]) ? (abilities[2].ability.name) : (<></>)}</div>
               <div className='slot4'>{(abilities[3]) ? (abilities[3].ability.name) : (<></>)}</div>
             </div>
             <div className='types'>
-               <div className='type1'>{(type1) ? (type1.type.name.toUpperCase()) : (<></>)}</div>
-               <div className='type2'>{(type2) ? (type2.type.name.toUpperCase()) : (<></>)}</div>
+               <div className={style1}>{(type1) ? (type1.type.name.toUpperCase()) : (<></>)}</div>
+               <div className={style2}>{(type2) ? (type2.type.name.toUpperCase()) : (<></>)}</div>
             </div>
           </div>
           <div className='profile'>

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../pokeCard.css';
 
 
 
@@ -24,9 +23,6 @@ const Pokecard = (props) => {
                 {capitalizedName}
             </div>
             <div className='id'>#{formattedId}</div>
-            <div className='modal'>
-
-            </div>
         </div>
     )
 }
