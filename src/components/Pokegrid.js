@@ -7,7 +7,7 @@ const Searchbar = () => {
     const [pokemons,setPokemons] = useState();
     const [loading,setLoading] = useState(false);
     const pokeFetch = async() =>{
-        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=10');
+        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=649');
         const promise = data.results.map(async (p)=>{
             return await fetchPokemons(p.url)
         })
