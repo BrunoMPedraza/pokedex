@@ -1,33 +1,40 @@
 import React,{useState} from 'react';
 
-const Modal = ({showModal,setShowModal,pokemon}) => {
+const Modal = ({showModal,setShowModal,pokemon,index,left,right,turnModal}) => {
   
   const [turned,setTurned] = useState(true);
   const turnPokemon = (e) => {
       e.stopPropagation();
-      setTurned(a => !a)
-      console.log(type1.type.name)
+      setTurned(a => !a);
   }
 
   const {name,id,sprites,height,weight,abilities,types} = pokemon;
   const {"generation-v":generationv} = sprites.versions;
   const {"black-white":black} = generationv;
-  const {animated} = black
+  const {animated} = black;
   const {"0":type1,"1":type2} = types;
-  const capitalizedName= (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
+  const capitalizedName = (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
   const formattedId = ('000'+id).slice(-3);
-  const meters= ((height/39.37)*4).toFixed(2); //please dont ask why *4, i just tested until it came to the real google height
+  const meters = ((height/39.37)*4).toFixed(2); //please dont ask why *4, i just tested until it came to the real google height
 
- 
   
 
   return (
     <>
     {showModal ? 
       <div className='background'>
+        <div className='exit' onClick={()=>{setShowModal(false)}}> Close </div>
         <div className='wrapper'>
+          
+          <div className='left' onClick={()=>{turnModal(left.id);}}>
+            #{('000'+left.id).slice(-3)}
+          </div>
+          <div className='right' onClick={()=>{turnModal(right.id);}}>
+          
+            #{('000'+right.id).slice(-3)}
+          </div>
           <div className='title'>
-            {name} <span>#{id}</span>
+            {capitalizedName} <span>#{formattedId}</span>
           </div>
           <div className='content'>
               <div className='height'><b>Height:</b> {height}'({meters}m) </div>

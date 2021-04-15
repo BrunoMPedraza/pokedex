@@ -2,7 +2,7 @@ import React from 'react'
 import {fetchPokemons} from './fetchPokemons';
 const {useState} = React;
 
-const Searchbar = () => {
+const Searchbar = (props) => {
     const [search,setSearch] = useState('');
     const [pokemon,setPokemon] = useState();
 
