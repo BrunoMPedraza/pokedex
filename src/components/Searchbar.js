@@ -9,10 +9,17 @@ const Searchbar = (props) => {
     const onChange= (e) =>{
         setSearch(e.target.value.toLowerCase());
     }
-    const onClick = async(e) => {
-        const data = await fetchPokemons(`https://pokeapi.co/api/v2/pokemon/${search}`)
-        console.log(data)
-        setPokemon(data);
+
+    const onClick = async() => {
+        try{
+            const data = await fetchPokemons(`https://pokeapi.co/api/v2/pokemon/${search}`)
+            setPokemon(data);
+            props.openModal(data.id-1);
+        }
+        catch(err){
+            console.log('Pokemon not found')
+        }
+        
     }
     return (
         <div className='navBar'>

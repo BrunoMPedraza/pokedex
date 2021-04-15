@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 
-const Modal = ({showModal,setShowModal,pokemon,index,left,right,turnModal}) => {
+const Modal = ({showModal,setShowModal,pokemon,left,right,turnModal}) => {
   
   const [turned,setTurned] = useState(true);
   const turnPokemon = (e) => {

@@ -11,12 +11,12 @@ const Pokecard = (props) => {
     
     const capitalizedName= (name.replace('-',' ').charAt(0).toUpperCase()+name.slice(1))
     const formattedId = ('000'+id).slice(-3);
-    const modalTest = () =>{
+    const communicateModal = () =>{
         props.openModal(props.arrayIndex);
     }
 
     return (
-        <div className='pokeCard' key={name} onClick={modalTest}>
+        <div className='pokeCard' key={name} onClick={communicateModal}>
             <div className='image'>
                 <img src={black.front_default} alt={name + "'s front"}></img>
             </div>

@@ -2,6 +2,8 @@ import React from 'react'
 import {fetchPokemons} from './fetchPokemons';
 import Pokecard from './Pokecard';
 import Modal from './Modal';
+import Searchbar from './Searchbar';
+
 const {useState,useEffect} = React;
 
 const Pokegrid = () => {
@@ -22,7 +24,6 @@ const Pokegrid = () => {
     }
 
     const turnModal= (e) => {
-        console.log(pokemons[e-1])
         openModal(e-1)
     }
 
@@ -34,7 +35,6 @@ const Pokegrid = () => {
 
 
     useEffect(()=>{
-
         pokeFetch();
     },[])
 
@@ -43,34 +43,40 @@ const Pokegrid = () => {
         {
             (!loading) ? (<img className='loader 'src='https://i.imgur.com/Zan8Ltj.gif' alt='loading'/>)
             : 
-            (<div className='showGrid'>
-                {pokemons.map((pokemon,idx)=>{
-                
-                return (                           
-                    <div>
-                        <Pokecard 
-                        pokemons={pokemon} 
-                        key={idx}
-                        arrayIndex={idx}
-                        openModal={openModal}
-                        /> 
-
-                        
-                    </div>);
-                })}
-                {(pokemons[pickedPokemon]) ? <div className='modal'>
-                        <Modal 
-                            showModal={showModal} 
-                            setShowModal={setShowModal}
-                            pokemon={pokemons[pickedPokemon]}
-                            index={pickedPokemon}
-                            amount={pokemons}
-                            left={pokemons[pickedPokemon-1] ? pokemons[pickedPokemon-1] : pokemons[pokemons.length-1]}
-                            right={pokemons[pickedPokemon+1] ? pokemons[pickedPokemon+1] : pokemons[0]}
-                            turnModal={turnModal}
-                         />
-                </div> : null}
-            </div>)
+            (<>
+            
+                <Searchbar
+                    openModal={openModal}
+                    pokemons={pokemons}
+                />
+                <div className='showGrid'>
+                    {pokemons.map((pokemon,idx)=>{
+                    
+                    return (                           
+                        <div>
+                            <Pokecard 
+                            pokemons={pokemon} 
+                            key={idx}
+                            arrayIndex={idx}
+                            openModal={openModal}
+                            /> 
+                        </div>)
+                        ;
+                    })}
+                    {(pokemons[pickedPokemon]) ? <div className='modal'>
+                            <Modal 
+                                showModal={showModal} 
+                                setShowModal={setShowModal}
+                                pokemon={pokemons[pickedPokemon]}
+                                index={pickedPokemon}
+                                amount={pokemons}
+                                left={pokemons[pickedPokemon-1] ? pokemons[pickedPokemon-1] : pokemons[pokemons.length-1]}
+                                right={pokemons[pickedPokemon+1] ? pokemons[pickedPokemon+1] : pokemons[0]}
+                                turnModal={turnModal}
+                            />
+                    </div> : null}
+                </div>
+            </>)
         }
     </>
     )

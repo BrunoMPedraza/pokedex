@@ -7,7 +7,6 @@ import './index.css';
 export default function App () {
     return(
         <div>
-            <Searchbar />
             <Pokegrid/>
             <div className='App'>
                 
