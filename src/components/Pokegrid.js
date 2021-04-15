@@ -14,7 +14,7 @@ const Pokegrid = () => {
 
     
     const pokeFetch = async() =>{
-        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=649');
+        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=12');
         const promise = data.results.map(async (p)=>{
             return await fetchPokemons(p.url)
         })

@@ -22,19 +22,13 @@ const Searchbar = (props) => {
         
     }
     return (
-        <div className='navBar'>
-            <div className='searchBar'>
-                <input 
-                type='text' 
-                placeholder="Pokemon's name"
-                onChange={onChange}>
-                </input>
-                <button onClick={onClick}>Buscar</button>
-                <div className='searchResult'>
-                    {pokemon && 
-                    <p>{pokemon.name}</p>}
-                </div>
-            </div>
+        <div className='searchBar'>
+            <input 
+            type='text' 
+            placeholder="Pokemon's name"
+            onChange={onChange}>
+            </input>
+            <button onClick={onClick}>Buscar</button>
         </div>
     )
 }
