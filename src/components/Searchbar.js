@@ -4,7 +4,6 @@ const {useState} = React;
 
 const Searchbar = (props) => {
     const [search,setSearch] = useState('');
-    const [pokemon,setPokemon] = useState();
 
     const onChange= (e) =>{
         setSearch(e.target.value.toLowerCase());
@@ -13,7 +12,6 @@ const Searchbar = (props) => {
     const onClick = async() => {
         try{
             const data = await fetchPokemons(`https://pokeapi.co/api/v2/pokemon/${search}`)
-            setPokemon(data);
             props.openModal(data.id-1);
         }
         catch(err){
