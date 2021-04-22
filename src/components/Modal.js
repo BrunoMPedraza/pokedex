@@ -29,11 +29,11 @@ const Modal = ({showModal,setShowModal,pokemon,left,right,turnModal}) => {
         <div className='wrapper'>
           
           <div className='left' onClick={()=>{turnModal(left.id);}}>
-            #{('000'+left.id).slice(-3)}
+            {(left.name.replace('-',' ').charAt(0).toUpperCase()+left.name.slice(1))}
           </div>
           <div className='right' onClick={()=>{turnModal(right.id);}}>
           
-            #{('000'+right.id).slice(-3)}
+          {(right.name.replace('-',' ').charAt(0).toUpperCase()+right.name.slice(1))}
           </div>
           <div className='title'>
             {capitalizedName} <span>#{formattedId}</span>
