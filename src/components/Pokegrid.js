@@ -14,7 +14,7 @@ const Pokegrid = () => {
 
     
     const pokeFetch = async() =>{
-        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=649');
+        const data = await fetchPokemons('https://pokeapi.co/api/v2/pokemon?limit=150');
         const promise = data.results.map(async (p)=>{
             return await fetchPokemons(p.url)
         })
@@ -42,7 +42,7 @@ const Pokegrid = () => {
     return (
     <>
         {
-            (!loading) ? (<img className='loader 'src='https://i.imgur.com/Zan8Ltj.gif' alt='loading'/>)
+            (!loading) ? (<img className='loader'src='https://cdn.dribbble.com/users/946764/screenshots/2844436/pokeball.gif' alt='loading'/>)
             : 
             (<>
             
